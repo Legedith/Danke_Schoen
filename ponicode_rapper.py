@@ -7,7 +7,7 @@ import os
 from nltk.tokenize import word_tokenize
 import pickle
 from multiprocessing import Pool
-
+import string
 
 class Rapper:
     """Ponicode Rapper generates lyrics by training on rap songs"""
@@ -17,9 +17,7 @@ class Rapper:
         self.pools = 5
         
     def remove_punctuation(self, word):
-        for punctuation in ['"','?','!', ',','.']:
-            word = word.replace(punctuation, '')
-        return word
+        return word.strip(string.punctuation)
         
     def load_data(self, data_dir=None):
         """
