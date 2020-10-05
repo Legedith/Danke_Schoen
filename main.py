@@ -15,6 +15,11 @@ import tkinter as tk
 from gtts import gTTS
 import requests
 
+def mp3_function(mp3_):
+    tts.save(mp3_)
+    playsound(mp3_)
+    os.remove(mp3_)
+
 
 random.seed(1)
 sites = ["https://findtheinvisiblecow.com/","http://www.fallingfalling.com/","http://ihasabucket.com/","http://tacospin.com/","https://thatsthefinger.com/","http://corndog.io/","http://www.staggeringbeauty.com/","https://hooooooooo.com/","http://endless.horse/","http://ninjaflex.com/","https://finger-frenzy.now.sh/","https://cat-bounce.com/","http://onemillionlols.com/","https://pointerpointer.com/","https://turbo.fish/","http://www.ismycomputeron.com/","http://iamawesome.com/","http://yeahlemons.com/","http://www.rrrgggbbb.com/","https://chrismckenzie.com/","https://www.adultswim.com/etcetera/elastic-man/"]
@@ -52,7 +57,8 @@ chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
 
 # Linux
 # chrome_path = '/usr/bin/google-chrome %s'
-dialogues = [i for i in os.listdir() if 'wav' in i]
+path='sounds/'
+dialogues = [i for i in os.listdir(path) if 'wav' in i]
 time.sleep(15)
 
 while True:
@@ -84,10 +90,8 @@ while True:
         continue
         t = time.strftime('%X %x')
         tts = gTTS(text="The time is 12:30 PM. It's definately not "+t, lang='en')
-        tts.save("time.mp3")
-        playsound("time.mp3")
-        os.remove("time.mp3")
-        
+        mp3_function("time.mp3")
+
     elif opt == "website":
         continue
         url = random.choice(sites)
@@ -100,18 +104,14 @@ while True:
 )
         a = r.json()
         tts = gTTS(text="There's an asteroid somewhere in space. It's name is "+a[random.randint(0, 9)]["full_name"], lang='en')
-        tts.save("asteroid.mp3")
-        playsound("asteroid.mp3")
-        os.remove("asteroid.mp3")
+        mp3_function("asteroid.mp3")
     
     elif opt == 'movie':
         r = requests.get("http://bechdeltest.com/api/v1/getMoviesByTitle?title=matrix")
         a = r.json()
         n = random.randint(0,2)
         tts = gTTS(text="The movie "+a[n]["title"]+" was released in year "+str(a[n]["year"])+" probably.", lang='en')
-        tts.save("movie.mp3")
-        playsound("movie.mp3")
-        os.remove("movie.mp3") 
+        mp3_function("movie.mp3")
         
     elif opt == 'pokemon':
         pokemons = ["charmander","bulbasaur","palkia","heatran"]
@@ -119,57 +119,43 @@ while True:
         r = requests.get("https://pokeapi.co/api/v2/pokemon/"+pokemon)
         a = r.json()
         tts = gTTS(text=""+a["name"]+"'s height is "+str(a["height"])+" feet. And maybe he can breathe fire. ", lang='en')
-        tts.save("pokemon.mp3")
-        playsound("pokemon.mp3")
-        os.remove("pokemon.mp3")
+        mp3_function("pokemon.mp3")
         
     elif opt == "cards":
         r = requests.get("https://deckofcardsapi.com/api/deck/new/draw/?count=1")
         a = r.json()    
         tts = gTTS(text="Your card is "+a['cards'][0]['value']+" of "+a['cards'][0]['suit']+". I know you didn't ask but you know, just in case.", lang='en')
-        tts.save("card.mp3")
-        playsound("card.mp3")
-        os.remove("card.mp3") 
+        mp3_function("card.mp3")
 
     elif opt == "motivate":
         h = {'accept':'application/json'}
         r = requests.get("https://www.foaas.com/bm/kiddo/future",headers = h)
         r = r.json()
         tts = gTTS(text=""+r["message"], lang='en')
-        tts.save("motivate.mp3")
-        playsound("motivate.mp3")
-        os.remove("motivate.mp3") 
+        mp3_function("motivate.mp3")
      
     elif opt == "random":
         r = requests.get("https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8")
         r = r.json()
         tts = gTTS(text="Your random number generated using  quantum stuff is "+str(r["data"]), lang='en')
-        tts.save("number.mp3")
-        playsound("number.mp3")
-        os.remove("number.mp3") 
+        mp3_function("number.mp3")
 
      
     elif opt == "user":
         r = requests.get("https://randomuser.me/api/")
         r = r.json()
         tts = gTTS(text="From now on, I'll call you "+r['results'][0]['name']["first"]+" "+r['results'][0]['name']["last"], lang='en')
-        tts.save("name.mp3")
-        playsound("name.mp3")
-        os.remove("name.mp3")     
+        mp3_function("name.mp3")
         
     elif opt == "space":
         r = requests.get("http://api.open-notify.org/astros.json")
         r = r.json()
         tts = gTTS(text="The number of people currently in space is "+str(r['number']), lang='en')
-        tts.save("space.mp3")
-        playsound("space.mp3")
-        os.remove("space.mp3")         
+        mp3_function("space.mp3")
         
     elif opt == "duck":
         r = requests.get("https://api.duckduckgo.com/?q=PlayDate&format=json")
         r = r.json()        
         tts = gTTS(text=""+r["AbstractText"], lang='en')
-        tts.save("abs.mp3")
-        playsound("abs.mp3")
-        os.remove("abs.mp3")        
+        mp3_function("abs.mp3")
         
