@@ -213,44 +213,28 @@ while True:
     time.sleep(sleep_time)    
 
     opt = random.choice(options)
-
-    if opt == "game":
-        game()
-
-    elif opt == "written":
-        written()
-
-    elif opt == "time":
+    
+    # The time and website have a continue
+    choices = dict("game":game,
+                 "written":written,
+                 "time": time,
+                 "website":website,
+                 "asteroid":asteroid,
+                 "movie":movie,
+                 "pokemon":pokemon,
+                 "cards":cards,
+                 "motivate":motivate,
+                 "random":randoms,
+                 "user":user,
+                 "space":space,
+                 "duck":duck)
+    if opt == "time":
+        # really continue before a function call skips the purpose of having function
         continue
-        time()
-
+        choices[opt]()
     elif opt == "website":
+        # This does not make sense to me as the function won't be called
         continue
-        website()
-
-    elif opt == "asteroid":
-        asteroid()
-
-    elif opt == "movie":
-        movie()
-
-    elif opt == "pokemon":
-        pokemon()
-
-    elif opt == "cards":
-        cards()
-
-    elif opt == "motivate":
-        motivate()
-
-    elif opt == "random":
-        random()
-
-    elif opt == "user":
-        user()
-
-    elif opt == "space":
-        space()
-
-    elif opt == "duck":
-        duck()
+        choices[opt]()
+    else:
+        choices[opt]()
