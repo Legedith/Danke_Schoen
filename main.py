@@ -55,9 +55,6 @@ Quote = Rapper()
 load_path = 'model/quotes_500.pkl'
 Quote.load_model(load_path)
 
-options = ["game","website","time","asteroid","written","movie","pokemon",
-           "cards","motivate","random","user","space","duck"]
-
 # print(Rap.generate_artistic_verses(NVERSES))
 # print(Poet.generate_artistic_verses(NVERSES))
 # print(Quote.generate_artistic_verses(NVERSES))
@@ -211,46 +208,18 @@ while True:
     print(track)
     sleep_time = random.randint(5, 15)
     time.sleep(sleep_time)    
-
-    opt = random.choice(options)
-
-    if opt == "game":
-        game()
-
-    elif opt == "written":
-        written()
-
-    elif opt == "time":
-        continue
-        time()
-
-    elif opt == "website":
-        continue
-        website()
-
-    elif opt == "asteroid":
-        asteroid()
-
-    elif opt == "movie":
-        movie()
-
-    elif opt == "pokemon":
-        pokemon()
-
-    elif opt == "cards":
-        cards()
-
-    elif opt == "motivate":
-        motivate()
-
-    elif opt == "random":
-        random()
-
-    elif opt == "user":
-        user()
-
-    elif opt == "space":
-        space()
-
-    elif opt == "duck":
-        duck()
+    choices = dict("game":game,
+                 "written":written,
+                 "time": time,
+                 "website":website,
+                 "asteroid":asteroid,
+                 "movie":movie,
+                 "pokemon":pokemon,
+                 "cards":cards,
+                 "motivate":motivate,
+                 "random":randoms,
+                 "user":user,
+                 "space":space,
+                 "duck":duck)
+    opt = random.choice(list(choices.keys()))
+    choices[opt]()
